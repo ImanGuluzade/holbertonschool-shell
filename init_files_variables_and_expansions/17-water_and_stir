@@ -1,2 +1,2 @@
 #!/bin/bash
-n=$((WATER+STIR));b=bestchol;r="";while [ $n -gt 0 ]; do r="${b:$((n%${#b})):1}$r"; n=$((n/${#b})); done; if [ -z "$r" ]; then r="${b:0:1}"; fi; echo $r
+echo $(( $(echo $WATER | tr 'ewwatratewa' '0123456789') + $(echo $STIR | tr 'ti.itirtrtr' '0123456789') )) | awk '{b="bestchol";s="";v=$1;while(v){s=substr(b,(v%length(b))+1,1)s;v=int(v/length(b))}print (s?s:substr(b,1,1))}'
