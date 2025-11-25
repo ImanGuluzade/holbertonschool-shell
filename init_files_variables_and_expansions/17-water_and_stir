@@ -1,2 +1,2 @@
 #!/bin/bash
-echo $(( $(echo $WATER | tr 'ewwatratewa' '0123456789') + $(echo $STIR | tr 'ti.itirtrtr' '0123456789') )) | awk '{b="bestchol";s="";v=$1;while(v){s=substr(b,(v%length(b))+1,1)s;v=int(v/length(b))}print (s?s:substr(b,1,1))}'
+n=0 i=0 while [ $i -lt ${#WATER} ]; do n=$((n*10 + ${WATER:i:1})); i=$((i+1)); done i=0 while [ $i -lt ${#STIR} ]; do n=$((n*10 + ${STIR:i:1})); i=$((i+1)); done r="" while [ $n -gt 0 ]; do t=$((n % 9)); r="${t}${r}"; n=$((n/9)); done if [ -z "$r" ]; then r=0; fi; echo $r
