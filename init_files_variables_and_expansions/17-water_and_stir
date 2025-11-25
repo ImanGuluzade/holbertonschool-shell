@@ -1,2 +1,2 @@
 #!/bin/bash
-n=$((WATER+STIR));b=bestchol;r="";while [ $n -gt 0 ];do r="${b:$((n%${#b})):1}$r";n=$((n/${#b}));done;[ -z "$r" ]&&r="${b:0:1}";echo $r
+n=$((WATER+STIR));b=bestchol;r="";while [ $n -gt 0 ]; do r="${b:$((n%${#b})):1}$r"; n=$((n/${#b})); done; if [ -z "$r" ]; then r="${b:0:1}"; fi; echo $r
