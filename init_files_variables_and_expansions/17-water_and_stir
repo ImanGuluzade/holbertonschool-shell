@@ -1,15 +1,2 @@
 #!/bin/bash
-w=$WATER
-s=$STIR
-b="bestchol"
-n=$((w+s))
-r=""
-l=${#b}
-while [ $n -gt 0 ]; do
-  i=$((n%l))
-  r="${b:i:1}$r"
-  n=$((n/l))
-done
-[ -z "$r" ] && r="${b:0:1}"
-echo "$r"
-
+n=$((WATER+STIR));b=bestchol;r="";while [ $n -gt 0 ];do r="${b:$((n%${#b})):1}$r";n=$((n/${#b}));done;[ -z "$r" ]&&r="${b:0:1}";echo $r
