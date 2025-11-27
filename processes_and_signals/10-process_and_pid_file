@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # This script runs indefinitely and handles signals with custom messages
-
-PID_FILE="/var/run/myscript.pid"
+echo $$ > "$PID_FILE"
+sleep 1
 
 # Create PID file with current script PID
 echo $$ > "$PID_FILE"
