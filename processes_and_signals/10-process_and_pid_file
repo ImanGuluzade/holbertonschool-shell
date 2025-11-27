@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# This script creates /var/run/myscript.pid and handles signals
+# This script creates a PID file and handles multiple signals
 
-PID_FILE="/var/run/myscript.pid"
+PID_FILE="/tmp/myscript.pid"   # use /tmp instead of /var/run
 
 # Create PID file
 echo $$ > "$PID_FILE"
