@@ -19,8 +19,12 @@ stop() {
 }
 
 restart() {
-    stop
-    start
+    if [ -f "$PID_FILE" ]; then
+        kill "$(cat "$PID_FILE")" 2>/dev/null
+        rm -f "$PID_FILE"
+    fi
+    $DAEMON &
+    echo $! > "$PID_FILE"
     echo "manage_my_process restarted"
 }
 
