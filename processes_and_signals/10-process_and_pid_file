@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# This script creates a PID file and responds to multiple signals while printing messages
+
+PID_FILE="/var/run/myscript.pid"
+
+# Create PID file
+echo $$ > "$PID_FILE"
+
+# Trap SIGTERM and SIGQUIT to delete PID file and terminate
+trap 'rm -f "$PID_FILE"; exit' SIGTERM SIGQUIT
+
+# Trap SIGTERM to display a message (for demonstration)
+trap 'echo "I hate the kill command"' SIGTERM
+
+# Trap SIGINT to display a message
+trap 'echo "Y U no love me?!"' SIGINT
+
+# Infinite loop printing message
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
