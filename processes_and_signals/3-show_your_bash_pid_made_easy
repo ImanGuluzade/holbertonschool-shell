@@ -3,6 +3,6 @@
 
 for pid in /proc/*/comm; do
     if grep -q bash "$pid"; then
-        echo "$(basename $(dirname $pid)) $(cat $pid)"
+        echo "$(basename "$(dirname "$pid")") $(cat "$pid")"
     fi
 done
