@@ -1,35 +1,18 @@
 #!/usr/bin/env bash
 # This script runs indefinitely and handles signals with custom messages
 
-PID_FILE="/var/run/myscript.pid"
-
-# Create PID file with current script PID
+PID_FILE="/tmp/myscript.pid"
 echo $$ > "$PID_FILE"
 
-# Function for SIGTERM
-term_handler() {
-    echo "I hate the kill command"
-}
+term_handler() { echo "I hate the kill command"; }
+int_handler() { echo "Y U no love me?!"; }
+quit_handler() { rm -f "$PID_FILE"; exit 0; }
 
-# Function for SIGINT (Ctrl+C)
-int_handler() {
-    echo "Y U no love me?!"
-}
-
-# Function for SIGQUIT or SIGTERM to terminate
-quit_handler() {
-    rm -f "$PID_FILE"
-    exit 0
-}
-
-# Trap signals
 trap term_handler SIGTERM
 trap int_handler SIGINT
 trap quit_handler SIGQUIT SIGTERM
 
-# Run indefinitely
-while true
-do
+while true; do
     echo "To infinity and beyond"
     sleep 2
 done
