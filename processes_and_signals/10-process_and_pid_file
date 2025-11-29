@@ -1,19 +1,36 @@
 #!/usr/bin/env bash
-# Creates the PID file and handles signals
 
 PID_FILE="/var/run/myscript.pid"
 
-# write PID
-echo $$ | sudo tee "$PID_FILE" > /dev/null
-sleep 1   # ensures checker sees PID file
+# Create PID file
+echo $$ > "$PID_FILE"
 
-# handle signals
-trap 'echo "Y U no love me?!"' SIGINT
-trap 'echo "I hate the kill command"; rm -f "$PID_FILE"; exit 0' SIGTERM
-trap 'rm -f "$PID_FILE"; exit 0' SIGQUIT
+# SIGINT handler (Ctrl+C)
+sigint_handler() {
+    echo "Y U no love me?!"
+}
 
-# infinite loop
-while true; do
+# SIGTERM handler
+sigterm_handler() {
+    echo "I hate the kill command"
+    rm -f "$PID_FILE"
+    exit 0
+}
+
+# SIGQUIT handler
+sigquit_handler() {
+    rm -f "$PID_FILE"
+    exit 0
+}
+
+# Set traps
+trap sigint_handler SIGINT
+trap sigterm_handler SIGTERM
+trap sigquit_handler SIGQUIT
+
+# Infinite loop
+while true
+do
     echo "To infinity and beyond"
-    sleep 2
+    sleep 1
 done
