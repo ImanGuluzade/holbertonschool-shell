@@ -1,12 +1,12 @@
-
 #!/usr/bin/env bash
+# Script creates /var/run/myscript.pid, prints messages indefinitely, and handles signals
 
 PID_FILE="/var/run/myscript.pid"
 
-# Create PID file
-echo $$ > "$PID_FILE"
+# Write the PID to the file
+echo "$$" > "$PID_FILE"
 
-# SIGINT handler
+# SIGINT handler (Ctrl+C)
 sigint_handler() {
     echo "Y U no love me?!"
 }
@@ -30,8 +30,7 @@ trap sigterm_handler SIGTERM
 trap sigquit_handler SIGQUIT
 
 # Infinite loop
-while true
-do
+while true; do
     echo "To infinity and beyond"
     sleep 1
 done
