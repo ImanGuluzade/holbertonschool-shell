@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Script creates /var/run/myscript.pid, prints messages indefinitely, and handles signals
+# Script creates /tmp/myscript.pid, prints messages indefinitely, and handles signals
 
-PID_FILE="/var/run/myscript.pid"
+PID_FILE="/tmp/myscript.pid"
 
-# Create PID file with sudo
-sudo sh -c "echo $$ > $PID_FILE"
+# Write PID to the file
+echo "$$" > "$PID_FILE"  || exit 1
 
 # SIGINT handler (Ctrl+C)
 sigint_handler() {
@@ -14,13 +14,13 @@ sigint_handler() {
 # SIGTERM handler
 sigterm_handler() {
     echo "I hate the kill command"
-    sudo rm -f "$PID_FILE"
+    rm -f "$PID_FILE"
     exit 0
 }
 
 # SIGQUIT handler
 sigquit_handler() {
-    sudo rm -f "$PID_FILE"
+    rm -f "$PID_FILE"
     exit 0
 }
 
