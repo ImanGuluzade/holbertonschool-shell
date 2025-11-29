@@ -1,11 +1,9 @@
-#!/usr/bin/env bash
-
 PID_FILE="/var/run/myscript.pid"
 
 # Create PID file
 echo $$ > "$PID_FILE"
 
-# SIGINT handler (Ctrl+C)
+# SIGINT handler
 sigint_handler() {
     echo "Y U no love me?!"
 }
